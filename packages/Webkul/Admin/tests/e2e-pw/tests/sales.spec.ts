@@ -1377,6 +1377,7 @@ export async function generateGroupOrder(adminPage) {
         "button.primary-button.w-max.px-11.py-3",
     );
     await nextBtn[nextBtn.length - 1].click();
+    await adminPage.waitForLoadState('networkidle');
     await expect(adminPage.getByText("Order Items")).toBeVisible();
 }
 

@@ -31,8 +31,10 @@ export async function register(page) {
     await page.getByPlaceholder("Confirm Password").click();
     await page.getByPlaceholder("Confirm Password").fill(credentials.password);
 
-
-    const isAgreementVisible = await page.locator("#agreement").nth(1).isVisible();
+    const isAgreementVisible = await page
+        .locator("#agreement")
+        .nth(1)
+        .isVisible();
 
     if (isAgreementVisible) {
         await page.getByText("I agree with this statement.").click();
@@ -57,11 +59,7 @@ export async function register(page) {
     await page.getByRole("button", { name: "Register" }).click();
 
     await expect(
-        page
-            .getByText(
-                "Account created successfully."
-            )
-            .first()
+        page.getByText("Account created successfully.").first(),
     ).toBeVisible();
 
     return credentials;
@@ -125,7 +123,7 @@ export async function addAddress(page) {
     await page.getByRole("button", { name: "Save" }).click();
 
     await expect(
-        page.getByText("Address have been successfully added.").first()
+        page.getByText("Address have been successfully added.").first(),
     ).toBeVisible();
 }
 
@@ -133,13 +131,13 @@ export async function addWishlist(page) {
     await page.locator(".action-items > span").first().click();
     await page
         .locator(
-            "div:nth-child(9) > div:nth-child(2) > div > .-mt-9 > .action-items > span"
+            "div:nth-child(9) > div:nth-child(2) > div > .-mt-9 > .action-items > span",
         )
         .first()
         .click();
 
     await expect(
-        page.getByText("Item Successfully Added To Wishlist").first()
+        page.getByText("Item Successfully Added To Wishlist").first(),
     ).toBeVisible();
 }
 
@@ -149,11 +147,7 @@ export async function addReview(page) {
         comment: generateDescription(),
     };
 
-    await page
-        .locator("#main div")
-        .filter({ hasText: "New Products View All New" })
-        .getByLabel("Arctic Touchscreen Winter")
-        .click();
+    await page.goto("arctic-cozy-knit-unisex-beanie");
     await page.getByRole("button", { name: "Reviews" }).click();
     await page.locator("#review-tab").getByText("Write a Review").click();
     await page.locator("#review-tab span").nth(3).click();
@@ -163,7 +157,7 @@ export async function addReview(page) {
     await page.getByRole("button", { name: "Submit Review" }).click();
 
     await expect(
-        page.getByText("Review submitted successfully.").first()
+        page.getByText("Review submitted successfully.").first(),
     ).toBeVisible();
 
     return review;

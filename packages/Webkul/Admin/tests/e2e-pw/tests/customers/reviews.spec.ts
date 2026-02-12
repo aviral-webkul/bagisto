@@ -27,7 +27,7 @@ test.describe("review management", () => {
             state: "visible",
         });
         const iconRight = await adminPage.$$(
-            "span.cursor-pointer.icon-sort-right"
+            "span.cursor-pointer.icon-sort-right",
         );
         await iconRight[0].click();
 
@@ -47,10 +47,9 @@ test.describe("review management", () => {
          * Checking if the status is updated successfully.
          */
         await expect(adminPage.getByText("Approved").first()).toBeVisible();
-        // await expect(adminPage.getByText('Review Update Successfully')).toBeVisible();
-         await expect(
-        adminPage.locator("#app p", { hasText: "Review Update Successfully" })
-    ).toBeVisible();
+        await expect(
+            adminPage.getByText("Review Update Successfully").first(),
+        ).toBeVisible();
     });
 
     test("should disapprove the review", async ({ adminPage }) => {
@@ -66,7 +65,7 @@ test.describe("review management", () => {
             state: "visible",
         });
         const iconRight = await adminPage.$$(
-            "span.cursor-pointer.icon-sort-right"
+            "span.cursor-pointer.icon-sort-right",
         );
         await iconRight[0].click();
 
@@ -86,9 +85,11 @@ test.describe("review management", () => {
          * Checking if the status is updated successfully.
          */
         await expect(adminPage.getByText("Disapproved").first()).toBeVisible();
-         await expect(
-        adminPage.locator("#app p", { hasText: "Review Update Successfully" })
-    ).toBeVisible();
+        await expect(
+            adminPage.locator("#app p", {
+                hasText: "Review Update Successfully",
+            }),
+        ).toBeVisible();
     });
 
     test("should approve the review via. mass update", async ({
@@ -113,7 +114,7 @@ test.describe("review management", () => {
          */
         let selectActionButton = await adminPage.waitForSelector(
             'button:has-text("Select Action")',
-            { timeout: 1000 }
+            { timeout: 1000 },
         );
         await selectActionButton.click();
 
@@ -123,7 +124,7 @@ test.describe("review management", () => {
         await adminPage.hover('a:has-text("Update Status")', { timeout: 1000 });
         await adminPage.waitForSelector(
             'a:has-text("Pending"), a:has-text("Approved"), a:has-text("Disapproved")',
-            { state: "visible", timeout: 1000 }
+            { state: "visible", timeout: 1000 },
         );
         await adminPage.click('a:has-text("Approved")');
 
@@ -135,7 +136,7 @@ test.describe("review management", () => {
             timeout: 1000,
         });
         const agreeButton = await adminPage.locator(
-            'button.primary-button:has-text("Agree")'
+            'button.primary-button:has-text("Agree")',
         );
 
         if (await agreeButton.isVisible()) {
@@ -148,9 +149,11 @@ test.describe("review management", () => {
          * Checking if the status is updated successfully.
          */
         await expect(adminPage.getByText("Approved").first()).toBeVisible();
-         await expect(
-        adminPage.locator("#app p", { hasText: "Selected Review Updated Successfully" })
-    ).toBeVisible();
+        await expect(
+            adminPage.locator("#app p", {
+                hasText: "Selected Review Updated Successfully",
+            }),
+        ).toBeVisible();
     });
 
     test("should disapprove the review via. mass update", async ({
@@ -175,7 +178,7 @@ test.describe("review management", () => {
          */
         let selectActionButton = await adminPage.waitForSelector(
             'button:has-text("Select Action")',
-            { timeout: 1000 }
+            { timeout: 1000 },
         );
         await selectActionButton.click();
 
@@ -185,7 +188,7 @@ test.describe("review management", () => {
         await adminPage.hover('a:has-text("Update Status")', { timeout: 1000 });
         await adminPage.waitForSelector(
             'a:has-text("Pending"), a:has-text("Approved"), a:has-text("Disapproved")',
-            { state: "visible", timeout: 1000 }
+            { state: "visible", timeout: 1000 },
         );
         await adminPage.click('a:has-text("Disapproved")');
 
@@ -197,7 +200,7 @@ test.describe("review management", () => {
             timeout: 1000,
         });
         const agreeButton = await adminPage.locator(
-            'button.primary-button:has-text("Agree")'
+            'button.primary-button:has-text("Agree")',
         );
 
         if (await agreeButton.isVisible()) {
@@ -210,9 +213,11 @@ test.describe("review management", () => {
          * Checking if the status is updated successfully.
          */
         await expect(adminPage.getByText("Disapproved").first()).toBeVisible();
-          await expect(
-        adminPage.locator("#app p", { hasText: "Selected Review Updated Successfully" })
-    ).toBeVisible();
+        await expect(
+            adminPage.locator("#app p", {
+                hasText: "Selected Review Updated Successfully",
+            }),
+        ).toBeVisible();
     });
 
     test("should delete a review", async ({ adminPage }) => {
@@ -226,7 +231,7 @@ test.describe("review management", () => {
          */
         await adminPage.waitForSelector("span.cursor-pointer.icon-delete");
         const iconDelete = await adminPage.$$(
-            "span.cursor-pointer.icon-delete"
+            "span.cursor-pointer.icon-delete",
         );
         await iconDelete[0].click();
 
@@ -235,7 +240,7 @@ test.describe("review management", () => {
          */
         await adminPage.waitForSelector("text=Are you sure");
         const agreeButton = await adminPage.locator(
-            'button.primary-button:has-text("Agree")'
+            'button.primary-button:has-text("Agree")',
         );
 
         /**
@@ -247,8 +252,10 @@ test.describe("review management", () => {
             console.error("Agree button not found or not visible.");
         }
         await expect(
-        adminPage.locator("#app p", { hasText: "Review Deleted Successfully" })
-    ).toBeVisible();
+            adminPage.locator("#app p", {
+                hasText: "Review Deleted Successfully",
+            }),
+        ).toBeVisible();
     });
 
     test("should mass delete a reviews", async ({ adminPage }) => {
@@ -271,7 +278,7 @@ test.describe("review management", () => {
          */
         let selectActionButton = await adminPage.waitForSelector(
             'button:has-text("Select Action")',
-            { timeout: 1000 }
+            { timeout: 1000 },
         );
         await selectActionButton.click();
 
@@ -288,7 +295,7 @@ test.describe("review management", () => {
             timeout: 1000,
         });
         const agreeButton = await adminPage.locator(
-            'button.primary-button:has-text("Agree")'
+            'button.primary-button:has-text("Agree")',
         );
 
         if (await agreeButton.isVisible()) {
@@ -301,7 +308,7 @@ test.describe("review management", () => {
          * Checking if the review is deleted successfully or not.
          */
         await expect(
-            adminPage.getByText("Selected Review Deleted Successfully")
+            adminPage.getByText("Selected Review Deleted Successfully"),
         ).toBeVisible();
     });
 });
