@@ -93,6 +93,9 @@ test.describe("should verfiy google captcha verfication", () => {
         adminPage,
     }) => {
         await adminPage.goto("");
+        await adminPage.getByPlaceholder("Search products here").fill("omni");
+        await adminPage.getByPlaceholder("Search products here").press("Enter");
+
         await adminPage
             .getByRole("button", { name: "Add To Cart" })
             .first()

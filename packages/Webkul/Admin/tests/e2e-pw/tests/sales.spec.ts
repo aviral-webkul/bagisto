@@ -1816,7 +1816,7 @@ test.describe(" rma management ", () => {
 
 test.describe("sales management", () => {
     test("should be able to create orders", async ({ adminPage }) => {
-        await generateOrder(adminPage);
+        await generateSimpleOrder(adminPage);
     });
 
     test("should be comment on order", async ({ adminPage }) => {
