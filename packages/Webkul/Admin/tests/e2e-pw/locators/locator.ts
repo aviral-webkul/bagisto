@@ -355,12 +355,8 @@ export class WebLocators {
     readonly successUpdateTaxCategory: Locator;
     readonly successDeleteTaxCategory: Locator;
     readonly selectCountry: Locator;
-<<<<<<< HEAD
     readonly saveCartRuleBTN: Locator;
-=======
     readonly searchBar: Locator;
-    readonly saveCartRuleBTN:Locator;
->>>>>>> fd51bc61ff (fixed acl and product issues)
 
     constructor(page: Page) {
         this.page = page;
@@ -972,12 +968,8 @@ export class WebLocators {
             "Tax Rates Assigned Categories cannot be deleted.",
         );
         this.selectCountry = page.locator('select[name="country"]');
-<<<<<<< HEAD
-        this.saveCartRuleBTN = page.getByRole("button", {
-=======
         this.searchBar=page.locator('input[name="query"]');
          this.saveCartRuleBTN = page.getByRole("button", {
->>>>>>> fd51bc61ff (fixed acl and product issues)
             name: " Save Cart Rule ",
         });
     }
