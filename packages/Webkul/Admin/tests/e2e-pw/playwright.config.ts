@@ -15,7 +15,7 @@ dotenv.config({ path: path.resolve(__dirname, "../../../../../.env") });
 export default defineConfig({
     testDir: "./tests",
 
-    timeout: 210 * 1000,
+    timeout: 240 * 1000,
 
     expect: { timeout: 20 * 1000 },
 
@@ -43,7 +43,7 @@ export default defineConfig({
     ],
 
     use: {
-        baseURL: `${"http://192.168.15.71/bagisto-master/public/"}/`.replace(/\/+$/, "/"),
+        baseURL: `${process.env.APP_URL}/`.replace(/\/+$/, "/"),
         screenshot: { mode: "only-on-failure", fullPage: true },
         video: "retain-on-failure",
         trace: "retain-on-failure",

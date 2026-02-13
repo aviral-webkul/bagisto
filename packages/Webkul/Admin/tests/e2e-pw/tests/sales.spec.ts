@@ -42,7 +42,7 @@ async function createSimpleProduct(adminPage) {
      * Main product data which we will use to create the product.
      */
     const product = {
-        name: generateName(),
+        name: `simple-${Date.now()}`,
         sku: generateSKU(),
         productNumber: generateSKU(),
         shortDescription: generateDescription(),
@@ -472,25 +472,17 @@ async function createGroupedProduct(adminPage) {
     await adminPage.getByRole("textbox", { name: "Search by name" }).click();
     await adminPage
         .getByRole("textbox", { name: "Search by name" })
-        .fill("arctic");
+        .fill("simple");
 
-    await adminPage
-        .locator("div.flex.justify-between.gap-2\\.5.border-b", {
-            has: adminPage.locator("p", {
-                hasText: "Arctic Bliss Stylish Winter Scarf",
-            }),
-        })
-        .locator('input[type="checkbox"]')
-        .check({ force: true });
-
-    await adminPage
-        .locator("div.flex.justify-between.gap-2\\.5.border-b", {
-            has: adminPage.locator("p", {
-                hasText: "Arctic Touchscreen Winter Gloves",
-            }),
-        })
-        .locator('input[type="checkbox"]')
-        .check({ force: true });
+   await adminPage
+    .locator("div.flex.justify-between.gap-2\\.5.border-b", {
+        has: adminPage.locator("p", {
+            hasText: "simple-",
+        }),
+    })
+    .first()
+    .locator('input[type="checkbox"]')
+    .check({ force: true });
 
     /**
      * Saving the added product.
@@ -2090,6 +2082,7 @@ test.describe("sales management", () => {
         });
 
         test("should be able to cancel group order", async ({ adminPage }) => {
+            await createSimpleProduct(adminPage);
             await createGroupedProduct(adminPage);
             /**
              * create order
