@@ -143,18 +143,6 @@ test.describe("attribute management", () => {
         await expect(
             adminPage.getByText("Family updated successfully.").first(),
         ).toBeVisible();
-
-        /**
-         * create product
-         */
-        adminPage.goto("admin/catalog/products");
-        await adminPage.waitForSelector(
-            'button.primary-button:has-text("Create Product")',
-        );
-        await adminPage.locator("p > span:nth-child(2)").first().click();
-        await adminPage.reload();
-        await adminPage.waitForTimeout(5000);
-        await expect(adminPage.getByText(attributeName)).toBeVisible();
     });
 
     test("should create a new textarea type attribute with wysiwyg editor", async ({
@@ -253,15 +241,6 @@ test.describe("attribute management", () => {
         await expect(
             adminPage.getByText("Family updated successfully.").first(),
         ).toBeVisible();
-
-        adminPage.goto("admin/catalog/products");
-        await adminPage.waitForSelector(
-            'button.primary-button:has-text("Create Product")',
-        );
-        await adminPage.locator("p > span:nth-child(2)").first().click();
-        await adminPage.reload();
-        await adminPage.waitForTimeout(5000);
-        await expect(adminPage.getByText(attributeName)).toBeVisible();
     });
 
     test("should create a new textarea type attribute without wysiwyg editor", async ({
@@ -358,15 +337,6 @@ test.describe("attribute management", () => {
         await expect(
             adminPage.getByText("Family updated successfully.").first(),
         ).toBeVisible();
-
-        adminPage.goto("admin/catalog/products");
-        await adminPage.waitForSelector(
-            'button.primary-button:has-text("Create Product")',
-        );
-        await adminPage.locator("p > span:nth-child(2)").first().click();
-        await adminPage.reload();
-        await adminPage.waitForTimeout(5000);
-        await expect(adminPage.getByText(attributeName)).toBeVisible();
     });
 
     test("should create a new select type attribute with dropdown swatch type", async ({
@@ -519,19 +489,6 @@ test.describe("attribute management", () => {
         await expect(
             adminPage.getByText("Family updated successfully.").first(),
         ).toBeVisible();
-
-        /**
-         * create product
-         */
-        adminPage.goto("admin/catalog/products");
-        await adminPage.waitForSelector(
-            'button.primary-button:has-text("Create Product")',
-        );
-        await adminPage.locator("p > span:nth-child(2)").first().click();
-        await adminPage.reload();
-        await adminPage.waitForTimeout(5000);
-        await expect(adminPage.getByText(attributeName)).toBeVisible();
-        await adminPage.getByText(attributeName).click();
     });
 
     test("should create a new select type attribute with color swatch type", async ({
@@ -687,19 +644,6 @@ test.describe("attribute management", () => {
         await expect(
             adminPage.getByText("Family updated successfully.").first(),
         ).toBeVisible();
-
-        /**
-         * create product
-         */
-        adminPage.goto("admin/catalog/products");
-        await adminPage.waitForSelector(
-            'button.primary-button:has-text("Create Product")',
-        );
-        await adminPage.locator("p > span:nth-child(2)").first().click();
-        await adminPage.reload();
-        await adminPage.waitForTimeout(5000);
-        await expect(adminPage.getByText(attributeName)).toBeVisible();
-        await adminPage.getByText(attributeName).click();
     });
 
     test("should create a new select type attribute with image swatch type", async ({
@@ -852,19 +796,6 @@ test.describe("attribute management", () => {
         await expect(
             adminPage.getByText("Family updated successfully.").first(),
         ).toBeVisible();
-
-        /**
-         * create product
-         */
-        adminPage.goto("admin/catalog/products");
-        await adminPage.waitForSelector(
-            'button.primary-button:has-text("Create Product")',
-        );
-        await adminPage.locator("p > span:nth-child(2)").first().click();
-        await adminPage.reload();
-        await adminPage.waitForTimeout(5000);
-        await expect(adminPage.getByText(attributeName)).toBeVisible();
-        await adminPage.getByText(attributeName).click();
     });
 
     test("should create a new select type attribute with text swatch type", async ({
@@ -1017,19 +948,6 @@ test.describe("attribute management", () => {
         await expect(
             adminPage.getByText("Family updated successfully.").first(),
         ).toBeVisible();
-
-        /**
-         * create product
-         */
-        adminPage.goto("admin/catalog/products");
-        await adminPage.waitForSelector(
-            'button.primary-button:has-text("Create Product")',
-        );
-        await adminPage.locator("p > span:nth-child(2)").first().click();
-        await adminPage.reload();
-        await adminPage.waitForTimeout(5000);
-        await expect(adminPage.getByText(attributeName)).toBeVisible();
-        await adminPage.getByText(attributeName).click();
     });
 
     test("should create a new price type attribute ", async ({ adminPage }) => {
@@ -1144,18 +1062,6 @@ test.describe("attribute management", () => {
         await expect(
             adminPage.getByText("Family updated successfully.").first(),
         ).toBeVisible();
-
-        /**
-         * create product
-         */
-        adminPage.goto("admin/catalog/products");
-        await adminPage.waitForSelector(
-            'button.primary-button:has-text("Create Product")',
-        );
-        await adminPage.locator("p > span:nth-child(2)").first().click();
-        await adminPage.reload();
-        await adminPage.waitForTimeout(5000);
-        await expect(adminPage.getByText(attributeName)).toBeVisible();
     });
 
     test("should create a new boolean type attribute ", async ({
@@ -1273,18 +1179,6 @@ test.describe("attribute management", () => {
         await expect(
             adminPage.getByText("Family updated successfully.").first(),
         ).toBeVisible();
-
-        /**
-         * create product
-         */
-        adminPage.goto("admin/catalog/products");
-        await adminPage.waitForSelector(
-            'button.primary-button:has-text("Create Product")',
-        );
-        await adminPage.locator("p > span:nth-child(2)").first().click();
-        await adminPage.reload();
-        await adminPage.waitForTimeout(5000);
-        await expect(adminPage.getByText(attributeName)).toBeVisible();
     });
 
     test("should create a new date type attribute ", async ({ adminPage }) => {
@@ -1399,18 +1293,6 @@ test.describe("attribute management", () => {
         await expect(
             adminPage.getByText("Family updated successfully.").first(),
         ).toBeVisible();
-
-        /**
-         * create product
-         */
-        adminPage.goto("admin/catalog/products");
-        await adminPage.waitForSelector(
-            'button.primary-button:has-text("Create Product")',
-        );
-        await adminPage.locator("p > span:nth-child(2)").first().click();
-        await adminPage.reload();
-        await adminPage.waitForTimeout(5000);
-        await expect(adminPage.getByText(attributeName)).toBeVisible();
     });
 
     test("should create a new datetime type attribute ", async ({
@@ -1528,17 +1410,6 @@ test.describe("attribute management", () => {
             adminPage.getByText("Family updated successfully.").first(),
         ).toBeVisible();
 
-        /**
-         * create product
-         */
-        adminPage.goto("admin/catalog/products");
-        await adminPage.waitForSelector(
-            'button.primary-button:has-text("Create Product")',
-        );
-        await adminPage.locator("p > span:nth-child(2)").first().click();
-        await adminPage.reload();
-        await adminPage.waitForTimeout(5000);
-        await expect(adminPage.getByText(attributeName)).toBeVisible();
     });
 
     test("should create a new image type attribute ", async ({ adminPage }) => {
@@ -1653,18 +1524,6 @@ test.describe("attribute management", () => {
         await expect(
             adminPage.getByText("Family updated successfully.").first(),
         ).toBeVisible();
-
-        /**
-         * create product
-         */
-        adminPage.goto("admin/catalog/products");
-        await adminPage.waitForSelector(
-            'button.primary-button:has-text("Create Product")',
-        );
-        await adminPage.locator("p > span:nth-child(2)").first().click();
-        await adminPage.reload();
-        await adminPage.waitForTimeout(5000);
-        await expect(adminPage.getByText(attributeName)).toBeVisible();
     });
 
     test("should create a new file type attribute ", async ({ adminPage }) => {
@@ -1779,18 +1638,6 @@ test.describe("attribute management", () => {
         await expect(
             adminPage.getByText("Family updated successfully.").first(),
         ).toBeVisible();
-
-        /**
-         * create product
-         */
-        adminPage.goto("admin/catalog/products");
-        await adminPage.waitForSelector(
-            'button.primary-button:has-text("Create Product")',
-        );
-        await adminPage.locator("p > span:nth-child(2)").first().click();
-        await adminPage.reload();
-        await adminPage.waitForTimeout(5000);
-        await expect(adminPage.getByText(attributeName)).toBeVisible();
     });
 
     test("should create a new multiselect type attribute", async ({
@@ -1942,19 +1789,6 @@ test.describe("attribute management", () => {
         await expect(
             adminPage.getByText("Family updated successfully.").first(),
         ).toBeVisible();
-
-        /**
-         * create product
-         */
-        adminPage.goto("admin/catalog/products");
-        await adminPage.waitForSelector(
-            'button.primary-button:has-text("Create Product")',
-        );
-        await adminPage.locator("p > span:nth-child(2)").first().click();
-        await adminPage.reload();
-        await adminPage.waitForTimeout(5000);
-        await expect(adminPage.getByText(attributeName)).toBeVisible();
-        await adminPage.getByText(attributeName).click();
     });
 
     test("should create a new checkbox type attribute", async ({
@@ -2105,18 +1939,6 @@ test.describe("attribute management", () => {
         await expect(
             adminPage.getByText("Family updated successfully.").first(),
         ).toBeVisible();
-
-        /**
-         * create product
-         */
-        adminPage.goto("admin/catalog/products");
-        await adminPage.waitForSelector(
-            'button.primary-button:has-text("Create Product")',
-        );
-        await adminPage.locator("p > span:nth-child(2)").first().click();
-        await adminPage.reload();
-        await adminPage.waitForTimeout(5000);
-        await expect(adminPage.getByText(attributeName)).toBeVisible();
     });
 
     test("should edit an existing attribute successfully", async ({
@@ -2172,7 +1994,7 @@ test.describe("attribute management", () => {
             { state: "visible" },
         );
         await adminPage.getByRole("button", { name: "" }).click();
-        await adminPage.getByText("50", { exact: true }).click();
+        await adminPage.getByText("50", { exact: true }).first().click();
         await adminPage.waitForSelector(".icon-uncheckbox:visible");
         const checkboxes = await adminPage.$$(".icon-uncheckbox:visible");
 
