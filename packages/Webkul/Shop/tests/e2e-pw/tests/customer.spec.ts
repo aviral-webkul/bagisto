@@ -633,20 +633,12 @@ test("should able to download downloadable orders", async ({ shopPage }) => {
 
 test("should add wishlist to cart", async ({ page }) => {
     await loginAsCustomer(page);
-
-    await addWishlist(page);
-
-    await page.locator(".action-items > span").first().click();
-    await page
-        .locator(
-            "div:nth-child(9) > div:nth-child(2) > div:nth-child(2) > .-mt-9 > .action-items > span"
-        )
-        .first()
-        .click();
-    await page.goto("");
-    await page.getByLabel("Profile").click();
-    await page.getByRole("link", { name: "Wishlist", exact: true }).click();
-    await page.getByRole("button", { name: "Move To Cart" }).nth(1).click();
+    await page.getByPlaceholder("Search products here").fill("simple");
+    await page.getByPlaceholder("Search products here").press("Enter");
+    await page.getByRole('button', { name: 'Add To Wishlist' }).first().click();
+    await page.waitForTimeout(2000);
+    await page.goto("customer/account/wishlist");
+    await page.getByRole("button", { name: "Move To Cart" }).first().click();
 
     await expect(
         page
@@ -657,15 +649,7 @@ test("should add wishlist to cart", async ({ page }) => {
 
 test("should remove product from wishlist", async ({ page }) => {
     await loginAsCustomer(page);
-
     await addWishlist(page);
-
-    await page
-        .locator(
-            "div:nth-child(9) > div:nth-child(2) > div:nth-child(3) > .-mt-9 > .action-items > span"
-        )
-        .first()
-        .click();
     await page.goto("");
     await page.getByLabel("Profile").click();
     await page.getByRole("link", { name: "Wishlist", exact: true }).click();
