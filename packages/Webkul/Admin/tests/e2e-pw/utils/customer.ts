@@ -146,8 +146,10 @@ export async function addReview(page) {
         title: generateName(),
         comment: generateDescription(),
     };
-
-    await page.goto("arctic-cozy-knit-unisex-beanie");
+    await page.goto("");
+    await page.getByPlaceholder("Search products here").fill("omni");
+    await page.getByPlaceholder("Search products here").press("Enter");
+    await page.locator(".group img").first().click();
     await page.getByRole("button", { name: "Reviews" }).click();
     await page.locator("#review-tab").getByText("Write a Review").click();
     await page.locator("#review-tab span").nth(3).click();

@@ -79,7 +79,10 @@ jobs:
         run: php artisan bagisto:install --skip-env-check --skip-admin-creation --skip-github-star
 
       - name: Seed Product Table
-        run: php artisan db:seed --class="Webkul\\Installer\\Database\\Seeders\\ProductTableSeeder"
+        run: |
+            php artisan db:seed --class="Webkul\\Installer\\Database\\Seeders\\ProductTableSeeder"
+            php artisan indexer:index --mode=full
+
 
       - name: Start Laravel server
         run: |
