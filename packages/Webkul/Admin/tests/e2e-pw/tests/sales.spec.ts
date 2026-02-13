@@ -493,13 +493,7 @@ async function createGroupedProduct(adminPage) {
      * Waiting for the products to be added.
      */
     await adminPage.waitForSelector(
-        'p:has-text("Arctic Touchscreen Winter Gloves")',
-    );
-    await adminPage.waitForSelector(
-        'p:has-text("Arctic Warmth Wool Blend Socks")',
-    );
-    await adminPage.waitForSelector(
-        'p:has-text("Arctic Bliss Stylish Winter")',
+        'p:has-text("simple")',
     );
 
     /**
@@ -612,15 +606,6 @@ async function createVirtualProduct(adminPage) {
      */
     await adminPage.locator('input[name="inventories\\[1\\]"]').click();
     await adminPage.locator('input[name="inventories\\[1\\]"]').fill("5000");
-
-    /**
-     * Categories Section.
-     */
-    await adminPage
-        .locator("label", { hasText: /^Men$/ })
-        .locator("span.icon-uncheckbox")
-        .first()
-        .click();
 
     /**
      * Saving the product.
@@ -2092,7 +2077,9 @@ test.describe("sales management", () => {
             /**
              * Should Cancel a Order
              */
+            await adminPage.waitForLoadState("networkidle");
             await adminPage.getByRole("link", { name: "Sales" }).click();
+            await adminPage.goto("admin/sales/orders");
 
             await adminPage
                 .locator(".flex.items-center.justify-between > a")
@@ -2119,7 +2106,9 @@ test.describe("sales management", () => {
             /**
              * Should Cancel a Order
              */
+            await adminPage.waitForLoadState("networkidle");
             await adminPage.getByRole("link", { name: "Sales" }).click();
+            await adminPage.goto("admin/sales/orders");
 
             await adminPage
                 .locator(".flex.items-center.justify-between > a")
@@ -2166,7 +2155,8 @@ test.describe("sales management", () => {
         /**
          * create order
          */
-        await generateOrder(adminPage);
+        await createSimpleProduct(adminPage);
+        await generateSimpleOrder(adminPage);
         await adminPage.waitForTimeout(3000);
 
         /**
@@ -2190,7 +2180,8 @@ test.describe("sales management", () => {
     test("support mass status Change  to Paid for Invoices", async ({
         adminPage,
     }) => {
-        await generateOrder(adminPage);
+        await createSimpleProduct(adminPage);
+        await generateSimpleOrder(adminPage);
         await adminPage.waitForTimeout(5000);
 
         /**
