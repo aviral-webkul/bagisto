@@ -74,8 +74,10 @@ test.describe("attribute management", () => {
 
         adminPage.goto("admin/catalog/families");
         await adminPage.waitForSelector("span.cursor-pointer.icon-edit");
-        const iconEdit = await adminPage.$$("span.cursor-pointer.icon-edit");
-        await iconEdit[0].click();
+        await adminPage
+            .locator('div.row:has-text("default")')
+            .locator("span.icon-edit")
+            .click();
 
         /**
          * Locate all target divs where items will be dragged
@@ -197,8 +199,10 @@ test.describe("attribute management", () => {
 
         adminPage.goto("admin/catalog/families");
         await adminPage.waitForSelector("span.cursor-pointer.icon-edit");
-        const iconEdit = await adminPage.$$("span.cursor-pointer.icon-edit");
-        await iconEdit[0].click();
+        await adminPage
+            .locator('div.row:has-text("default")')
+            .locator("span.icon-edit")
+            .click();
 
         // Locate all target divs where items will be dragged
         const targets = await adminPage.$$(
@@ -301,9 +305,10 @@ test.describe("attribute management", () => {
 
         adminPage.goto("admin/catalog/families");
         await adminPage.waitForSelector("span.cursor-pointer.icon-edit");
-        const iconEdit = await adminPage.$$("span.cursor-pointer.icon-edit");
-        await iconEdit[0].click();
-
+        await adminPage
+            .locator('div.row:has-text("default")')
+            .locator("span.icon-edit")
+            .click();
         // Locate all target divs where items will be dragged
         const targets = await adminPage.$$(
             "div.flex.gap-5.justify-between.px-4 > div > div.h-\\[calc\\(100vh-285px\\)\\].overflow-auto.border-gray-200.pb-4.ltr\\:border-r.rtl\\:border-l",
@@ -444,8 +449,10 @@ test.describe("attribute management", () => {
          */
         adminPage.goto("admin/catalog/families");
         await adminPage.waitForSelector("span.cursor-pointer.icon-edit");
-        const iconEdit = await adminPage.$$("span.cursor-pointer.icon-edit");
-        await iconEdit[0].click();
+        await adminPage
+            .locator('div.row:has-text("default")')
+            .locator("span.icon-edit")
+            .click();
 
         /**
          *  Locate all target divs where items will be dragged
@@ -611,9 +618,10 @@ test.describe("attribute management", () => {
          */
         adminPage.goto("admin/catalog/families");
         await adminPage.waitForSelector("span.cursor-pointer.icon-edit");
-        const iconEdit = await adminPage.$$("span.cursor-pointer.icon-edit");
-        await iconEdit[0].click();
-
+        await adminPage
+            .locator('div.row:has-text("default")')
+            .locator("span.icon-edit")
+            .click();
         /**
          *  Locate all target divs where items will be dragged
          */
@@ -774,8 +782,10 @@ test.describe("attribute management", () => {
          */
         adminPage.goto("admin/catalog/families");
         await adminPage.waitForSelector("span.cursor-pointer.icon-edit");
-        const iconEdit = await adminPage.$$("span.cursor-pointer.icon-edit");
-        await iconEdit[0].click();
+        await adminPage
+            .locator('div.row:has-text("default")')
+            .locator("span.icon-edit")
+            .click();
 
         /**
          *  Locate all target divs where items will be dragged
@@ -937,8 +947,10 @@ test.describe("attribute management", () => {
          */
         adminPage.goto("admin/catalog/families");
         await adminPage.waitForSelector("span.cursor-pointer.icon-edit");
-        const iconEdit = await adminPage.$$("span.cursor-pointer.icon-edit");
-        await iconEdit[0].click();
+        await adminPage
+            .locator('div.row:has-text("default")')
+            .locator("span.icon-edit")
+            .click();
 
         /**
          *  Locate all target divs where items will be dragged
@@ -1062,8 +1074,10 @@ test.describe("attribute management", () => {
          */
         adminPage.goto("admin/catalog/families");
         await adminPage.waitForSelector("span.cursor-pointer.icon-edit");
-        const iconEdit = await adminPage.$$("span.cursor-pointer.icon-edit");
-        await iconEdit[0].click();
+        await adminPage
+            .locator('div.row:has-text("default")')
+            .locator("span.icon-edit")
+            .click();
 
         /**
          *  Locate all target divs where items will be dragged
@@ -1189,8 +1203,10 @@ test.describe("attribute management", () => {
          */
         adminPage.goto("admin/catalog/families");
         await adminPage.waitForSelector("span.cursor-pointer.icon-edit");
-        const iconEdit = await adminPage.$$("span.cursor-pointer.icon-edit");
-        await iconEdit[0].click();
+        await adminPage
+            .locator('div.row:has-text("default")')
+            .locator("span.icon-edit")
+            .click();
 
         /**
          *  Locate all target divs where items will be dragged
@@ -1313,8 +1329,10 @@ test.describe("attribute management", () => {
          */
         adminPage.goto("admin/catalog/families");
         await adminPage.waitForSelector("span.cursor-pointer.icon-edit");
-        const iconEdit = await adminPage.$$("span.cursor-pointer.icon-edit");
-        await iconEdit[0].click();
+        await adminPage
+            .locator('div.row:has-text("default")')
+            .locator("span.icon-edit")
+            .click();
 
         /**
          *  Locate all target divs where items will be dragged
@@ -1439,8 +1457,10 @@ test.describe("attribute management", () => {
          */
         adminPage.goto("admin/catalog/families");
         await adminPage.waitForSelector("span.cursor-pointer.icon-edit");
-        const iconEdit = await adminPage.$$("span.cursor-pointer.icon-edit");
-        await iconEdit[0].click();
+        await adminPage
+            .locator('div.row:has-text("default")')
+            .locator("span.icon-edit")
+            .click();
 
         /**
          *  Locate all target divs where items will be dragged
@@ -1563,8 +1583,10 @@ test.describe("attribute management", () => {
          */
         adminPage.goto("admin/catalog/families");
         await adminPage.waitForSelector("span.cursor-pointer.icon-edit");
-        const iconEdit = await adminPage.$$("span.cursor-pointer.icon-edit");
-        await iconEdit[0].click();
+        await adminPage
+            .locator('div.row:has-text("default")')
+            .locator("span.icon-edit")
+            .click();
 
         /**
          *  Locate all target divs where items will be dragged
@@ -1687,8 +1709,10 @@ test.describe("attribute management", () => {
          */
         adminPage.goto("admin/catalog/families");
         await adminPage.waitForSelector("span.cursor-pointer.icon-edit");
-        const iconEdit = await adminPage.$$("span.cursor-pointer.icon-edit");
-        await iconEdit[0].click();
+        await adminPage
+            .locator('div.row:has-text("default")')
+            .locator("span.icon-edit")
+            .click();
 
         /**
          *  Locate all target divs where items will be dragged
@@ -1848,8 +1872,10 @@ test.describe("attribute management", () => {
          */
         adminPage.goto("admin/catalog/families");
         await adminPage.waitForSelector("span.cursor-pointer.icon-edit");
-        const iconEdit = await adminPage.$$("span.cursor-pointer.icon-edit");
-        await iconEdit[0].click();
+        await adminPage
+            .locator('div.row:has-text("default")')
+            .locator("span.icon-edit")
+            .click();
 
         /**
          *  Locate all target divs where items will be dragged
@@ -2010,8 +2036,10 @@ test.describe("attribute management", () => {
          */
         adminPage.goto("admin/catalog/families");
         await adminPage.waitForSelector("span.cursor-pointer.icon-edit");
-        const iconEdit = await adminPage.$$("span.cursor-pointer.icon-edit");
-        await iconEdit[0].click();
+        await adminPage
+            .locator('div.row:has-text("default")')
+            .locator("span.icon-edit")
+            .click();
 
         /**
          *  Locate all target divs where items will be dragged
@@ -2078,17 +2106,17 @@ test.describe("attribute management", () => {
             adminPage.getByText("Family updated successfully.").first(),
         ).toBeVisible();
 
-        // /**
-        //  * create product
-        //  */
-        // adminPage.goto("admin/catalog/products");
-        // await adminPage.waitForSelector(
-        //     'button.primary-button:has-text("Create Product")',
-        // );
-        // await adminPage.locator("p > span:nth-child(2)").first().click();
-        // await adminPage.reload();
-        // await adminPage.waitForTimeout(5000);
-        // await expect(adminPage.getByText(attributeName)).toBeVisible();
+        /**
+         * create product
+         */
+        adminPage.goto("admin/catalog/products");
+        await adminPage.waitForSelector(
+            'button.primary-button:has-text("Create Product")',
+        );
+        await adminPage.locator("p > span:nth-child(2)").first().click();
+        await adminPage.reload();
+        await adminPage.waitForTimeout(5000);
+        await expect(adminPage.getByText(attributeName)).toBeVisible();
     });
 
     test("should edit an existing attribute successfully", async ({
