@@ -147,7 +147,7 @@ export async function addReview(page) {
         comment: generateDescription(),
     };
     await page.goto("");
-    await page.getByPlaceholder("Search products here").fill("omni");
+    await page.getByPlaceholder("Search products here").fill("simple");
     await page.getByPlaceholder("Search products here").press("Enter");
     await page.locator(".group img").first().click();
     await page.getByRole("button", { name: "Reviews" }).click();
