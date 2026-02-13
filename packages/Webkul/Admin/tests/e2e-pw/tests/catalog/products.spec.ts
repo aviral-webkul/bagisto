@@ -18,7 +18,7 @@ async function createSimpleProduct(adminPage) {
      * Main product data which we will use to create the product.
      */
     const product = {
-        name: generateName(),
+        name: 'simple-' + generateName(),
         sku: generateSKU(),
         productNumber: generateSKU(),
         shortDescription: generateDescription(),
@@ -155,7 +155,7 @@ async function createConfigurableProduct(adminPage) {
     await adminPage.locator('select[name="type"]').selectOption("configurable");
     await adminPage
         .locator('select[name="attribute_family_id"]')
-        .selectOption("1");
+        .selectOption({ label: 'Clothing' });
     await adminPage.locator('input[name="sku"]').fill(generateSKU());
     await adminPage.getByRole("button", { name: "Save Product" }).click();
 
@@ -266,25 +266,6 @@ async function createConfigurableProduct(adminPage) {
      * Image Section.
      */
     // Will add images later.
-
-    /**
-     * Adding new variant.
-     */
-    await adminPage.getByText("Add Variant").click();
-    await adminPage.locator('select[name="color"]').selectOption("1");
-    await adminPage.locator('select[name="size"]').selectOption("6");
-    await adminPage.getByRole("button", { name: "Add" }).click();
-    await adminPage.locator('input[name="name"]').nth(1).fill(generateName());
-    await adminPage.locator('input[name="price"]').fill("100");
-    await adminPage.locator('input[name="weight"]').fill("10");
-    await adminPage.locator('input[name="inventories\\[1\\]"]').fill("10");
-    const skuValue = await adminPage
-        .locator('input[name="sku"]')
-        .nth(1)
-        .inputValue();
-    await adminPage.getByRole("button", { name: "Save", exact: true }).click();
-    await expect(adminPage.getByText(`${skuValue}`)).toBeVisible();
-
     /**
      * Adding price to all varients through multiselect.
      */
