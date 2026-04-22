@@ -101,25 +101,25 @@ test.describe("configurable product management", () => {
     test("should edit a configurable product", async ({ adminPage }) => {
         await new ProductEditPage(adminPage).editConfigurableProduct();
 
-        await expect(adminPage.locator("#app")).toContainText(
-            /Product updated successfully/i,
-        );
+        await expect(
+            adminPage.getByText(/Product updated successfully/i),
+        ).toBeVisible();
     });
 
     test("should mass update the products", async ({ adminPage }) => {
         await new ProductEditPage(adminPage).massUpdateProducts();
 
-        await expect(adminPage.locator("#app")).toContainText(
-            /Product updated successfully/i,
-        );
+        await expect(
+            adminPage.getByText(/Product updated successfully/i),
+        ).toBeVisible();
     });
 
     test("should mass delete the products", async ({ adminPage }) => {
         await new ProductDeletePage(adminPage).massDeleteProducts();
 
-        await expect(adminPage.locator("#app")).toContainText(
-            /Product deleted successfully/i,
-        );
+        await expect(
+            adminPage.getByText(/Product deleted successfully/i),
+        ).toBeVisible();
     });
 });
 
@@ -144,25 +144,25 @@ test.describe("grouped product management", () => {
     test("should edit a grouped product", async ({ adminPage }) => {
         await new ProductEditPage(adminPage).editGroupedProduct();
 
-        await expect(adminPage.locator("#app")).toContainText(
-            /Product updated successfully/i,
-        );
+        await expect(
+            adminPage.getByText(/Product updated successfully/i).first(),
+        ).toBeVisible();
     });
 
     test("should mass update the products", async ({ adminPage }) => {
         await new ProductEditPage(adminPage).massUpdateProducts();
 
-        await expect(adminPage.locator("#app")).toContainText(
-            /Product updated successfully/i,
-        );
+        await expect(
+            adminPage.getByText(/Product updated successfully/i).first(),
+        ).toBeVisible();
     });
 
     test("should mass delete the products", async ({ adminPage }) => {
         await new ProductDeletePage(adminPage).massDeleteProducts();
 
-        await expect(adminPage.locator("#app")).toContainText(
-            /Product deleted successfully/i,
-        );
+        await expect(
+            adminPage.getByText(/Product deleted successfully/i).first(),
+        ).toBeVisible();
     });
 });
 
@@ -188,25 +188,25 @@ test.describe("virtual product management", () => {
     test("should edit a virtual product", async ({ adminPage }) => {
         await new ProductEditPage(adminPage).editVirtualProduct();
 
-        await expect(adminPage.locator("#app")).toContainText(
-            /Product updated successfully/i,
-        );
+        await expect(
+            adminPage.getByText(/Product updated successfully/i).first(),
+        ).toBeVisible();
     });
 
     test("should mass update the products", async ({ adminPage }) => {
         await new ProductEditPage(adminPage).massUpdateProducts();
 
-        await expect(adminPage.locator("#app")).toContainText(
-            /Product updated successfully/i,
-        );
+        await expect(
+            adminPage.getByText(/Product updated successfully/i).first(),
+        ).toBeVisible();
     });
 
     test("should mass delete the products", async ({ adminPage }) => {
         await new ProductDeletePage(adminPage).massDeleteProducts();
 
-        await expect(adminPage.locator("#app")).toContainText(
-            /Product deleted successfully/i,
-        );
+        await expect(
+            adminPage.getByText(/Product deleted successfully/i).first(),
+        ).toBeVisible();
     });
 });
 
@@ -234,25 +234,25 @@ test.describe("downloadable product management", () => {
     test("should edit a downloadable product", async ({ adminPage }) => {
         await new ProductEditPage(adminPage).editDownloadableProduct();
 
-        await expect(adminPage.locator("#app")).toContainText(
-            /Product updated successfully/i,
-        );
+        await expect(
+            adminPage.getByText(/Product updated successfully/i).first(),
+        ).toBeVisible();
     });
 
     test("should mass update the products", async ({ adminPage }) => {
         await new ProductEditPage(adminPage).massUpdateProducts();
 
-        await expect(adminPage.locator("#app")).toContainText(
-            /Product updated successfully/i,
-        );
+        await expect(
+            adminPage.getByText(/Product updated successfully/i).first(),
+        ).toBeVisible();
     });
 
     test("should mass delete the products", async ({ adminPage }) => {
         await new ProductDeletePage(adminPage).massDeleteProducts();
 
-        await expect(adminPage.locator("#app")).toContainText(
-            /Product deleted successfully/i,
-        );
+        await expect(
+            adminPage.getByText(/Product deleted successfully/i).first(),
+        ).toBeVisible();
     });
 });
 
