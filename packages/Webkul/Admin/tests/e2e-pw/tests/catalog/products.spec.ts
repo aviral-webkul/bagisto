@@ -5,10 +5,7 @@ import { ProductDeletePage } from "../../pages/admin/catalog/products/ProductDel
 import { ProductEditPage } from "../../pages/admin/catalog/products/ProductEditPage";
 import {
     generateDescription,
-    generateHostname,
-    generateLocation,
     generateName,
-    generateRandomDateTime,
     generateSKU,
 } from "../../utils/faker";
 
@@ -63,17 +60,13 @@ test.describe("simple product management", () => {
     test("should mass update the products", async ({ adminPage }) => {
         await new ProductEditPage(adminPage).massUpdateProducts();
 
-        await expect(
-            adminPage.getByText("Selected Products Updated Successfully"),
-        ).toBeVisible();
+        await expect(adminPage.getByText("Selected Products Updated Successfully").first()).toBeVisible();
     });
 
     test("should mass delete the products", async ({ adminPage }) => {
         await new ProductDeletePage(adminPage).massDeleteProducts();
 
-        await expect(
-            adminPage.getByText(/deleted successfully/i).first(),
-        ).toBeVisible();
+        await expect(adminPage.getByText("Selected Products Deleted Successfully").first()).toBeVisible();
     });
 });
 
@@ -106,20 +99,16 @@ test.describe("configurable product management", () => {
         ).toBeVisible();
     });
 
-    test("should mass update the products", async ({ adminPage }) => {
+    test("should mass update the config products", async ({ adminPage }) => {
         await new ProductEditPage(adminPage).massUpdateProducts();
 
-        await expect(
-            adminPage.getByText(/Product updated successfully/i),
-        ).toBeVisible();
+        await expect(adminPage.getByText("Selected Products Updated Successfully").first()).toBeVisible();
     });
 
     test("should mass delete the products", async ({ adminPage }) => {
         await new ProductDeletePage(adminPage).massDeleteProducts();
 
-        await expect(
-            adminPage.getByText(/Product deleted successfully/i),
-        ).toBeVisible();
+        await expect(adminPage.getByText("Selected Products Deleted Successfully").first()).toBeVisible();
     });
 });
 
@@ -152,17 +141,13 @@ test.describe("grouped product management", () => {
     test("should mass update the products", async ({ adminPage }) => {
         await new ProductEditPage(adminPage).massUpdateProducts();
 
-        await expect(
-            adminPage.getByText(/Product updated successfully/i).first(),
-        ).toBeVisible();
+        await expect(adminPage.getByText("Selected Products Updated Successfully").first()).toBeVisible();
     });
 
     test("should mass delete the products", async ({ adminPage }) => {
         await new ProductDeletePage(adminPage).massDeleteProducts();
 
-        await expect(
-            adminPage.getByText(/Product deleted successfully/i).first(),
-        ).toBeVisible();
+        await expect(adminPage.getByText("Selected Products Deleted Successfully").first()).toBeVisible();
     });
 });
 
@@ -196,17 +181,13 @@ test.describe("virtual product management", () => {
     test("should mass update the products", async ({ adminPage }) => {
         await new ProductEditPage(adminPage).massUpdateProducts();
 
-        await expect(
-            adminPage.getByText(/Product updated successfully/i).first(),
-        ).toBeVisible();
+        await expect(adminPage.getByText("Selected Products Updated Successfully").first()).toBeVisible();
     });
 
     test("should mass delete the products", async ({ adminPage }) => {
         await new ProductDeletePage(adminPage).massDeleteProducts();
 
-        await expect(
-            adminPage.getByText(/Product deleted successfully/i).first(),
-        ).toBeVisible();
+        await expect(adminPage.getByText("Selected Products Deleted Successfully").first()).toBeVisible();
     });
 });
 
@@ -242,17 +223,13 @@ test.describe("downloadable product management", () => {
     test("should mass update the products", async ({ adminPage }) => {
         await new ProductEditPage(adminPage).massUpdateProducts();
 
-        await expect(
-            adminPage.getByText(/Product updated successfully/i).first(),
-        ).toBeVisible();
+        await expect(adminPage.getByText("Selected Products Updated Successfully").first()).toBeVisible();
     });
 
     test("should mass delete the products", async ({ adminPage }) => {
         await new ProductDeletePage(adminPage).massDeleteProducts();
 
-        await expect(
-            adminPage.getByText(/Product deleted successfully/i).first(),
-        ).toBeVisible();
+        await expect(adminPage.getByText("Selected Products Deleted Successfully").first()).toBeVisible();
     });
 });
 
