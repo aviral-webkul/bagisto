@@ -11,7 +11,6 @@ test.describe('promotion management', () => {
             await adminPage.fill('#name', generateName());
             await adminPage.fill('#description', generateDescription());
             await adminPage.click('div.secondary-button:has-text("Add Condition")');
-            await adminPage.waitForSelector('select[id="conditions[0][attribute]"]');
             await adminPage.selectOption('select[id="conditions[0][attribute]"]', 'product|name');
             await adminPage.waitForSelector('input[name="conditions[0][value]"]');
             await adminPage.fill('input[name="conditions[0][value]"]', generateName());
@@ -71,7 +70,8 @@ test.describe('promotion management', () => {
             await adminPage.waitForSelector('form[action*="/promotions/catalog-rules/create"]');
             await adminPage.fill('#name', generateName());
             await adminPage.fill('#description', generateDescription());
-            await adminPage.waitForSelector('select[id="conditions[0][attribute]"]');
+            await adminPage.click('div.secondary-button:has-text("Add Condition")');
+            await adminPage.waitForTimeout(1000)
             await adminPage.selectOption('select[id="conditions[0][attribute]"]', 'product|name');
             await adminPage.waitForSelector('input[name="conditions[0][value]"]');
             await adminPage.fill('input[name="conditions[0][value]"]', generateName());
