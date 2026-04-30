@@ -3,7 +3,6 @@ import { BasePage } from "../../BasePage";
 import fs from "fs";
 
 export class RuleApplyPage extends BasePage {
-
     constructor(page: Page) {
         super(page);
     }
@@ -109,14 +108,36 @@ export class RuleApplyPage extends BasePage {
         return this.page.getByAltText("Money Transfer");
     }
 
+    async getSubTotalValue(): Promise<number> {
+        await this.page.waitForLoadState('networkidle');
+
+        const subtotalRow = this.page
+            .locator('div.flex.justify-between.text-right', { hasText: 'Subtotal' }).first();
+
+        await subtotalRow.waitFor({ state: 'visible', timeout: 15000 });
+
+        const subtotalText = await subtotalRow.locator('p').last().innerText();
+        return parseFloat(subtotalText.replace(/[^0-9.]/g, ''));
+    }
+
     getSavedProduct() {
         const filePath = "product-data.json";
         const data = fs.readFileSync(filePath, "utf-8");
         return JSON.parse(data);
     }
 
-    async applyCoupon(incrementTimes?: number) {
-        await this.visit("");
+    async applyCoupon() {
+        await this.applyCouponButton.click();
+        await this.couponInput.fill("TEST50");
+        await this.applyButton.click();
+    }
+
+    async calculateDiscountedAmmount(
+        discountValue: number,
+        couponType: string,
+        incrementTimes?: number
+    ): Promise<number> {
+         await this.visit("");
 
         const product = this.getSavedProduct();
         await this.searchInput.fill(product.name);
@@ -136,9 +157,23 @@ export class RuleApplyPage extends BasePage {
             await expect(this.cartUpdateSuccess.first()).toBeVisible();
         }
 
-        await this.applyCouponButton.click();
-        await this.couponInput.fill("TEST50");
-        await this.applyButton.click();
+
+        const subtotal = await this.getSubTotalValue();
+        
+        if (couponType == "fixed") {
+            if (subtotal < Number(discountValue)) {
+                console.log('enter');
+                return 0;
+            }
+            const discount = Number(discountValue);
+            return Math.max(subtotal - discount, 0);
+        }
+
+        if (couponType == "percentage") {
+            return subtotal - (subtotal * discountValue) / 100;
+        }
+
+        return subtotal;
     }
 
     async verifyCatalogRule() {
