@@ -67,7 +67,7 @@ test.describe("cart rules", () => {
                 ).toContainText("$0.00");
             } else {
                 await expect(
-                    page.getByText("Grand Total").locator(".."),
+                    page.getByText("Grand Total").first().locator(".."),
                 ).toContainText(discountedAmount.toString());
             }
         });

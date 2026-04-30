@@ -54,7 +54,7 @@ test.describe("cart rules", () => {
                     discountValue,
                     "fixed",
                 );
-            await ruleApplyPage.applyCouponAtCheckout();
+            await ruleApplyPage.applyCouponAtCheckout2();
 
             await expect(
                 page.getByText("Coupon code applied successfully.").first(),
@@ -94,7 +94,7 @@ test.describe("cart rules", () => {
                     discountValue,
                     "percentage",
                 );
-            await ruleApplyPage.applyCouponAtCheckout();
+            await ruleApplyPage.applyCouponAtCheckout2();
 
             await expect(
                 page.getByText("Coupon code applied successfully.").first(),
@@ -134,7 +134,7 @@ test.describe("cart rules", () => {
                     discountValue,
                     "fixed",
                 );
-            await ruleApplyPage.applyCouponAtCheckout();
+            await ruleApplyPage.applyCouponAtCheckout2();
 
             await expect(
                 page.getByText("Coupon code applied successfully.").first(),
@@ -174,7 +174,7 @@ test.describe("cart rules", () => {
                     discountValue,
                     "percentage",
                 );
-            await ruleApplyPage.applyCouponAtCheckout();
+            await ruleApplyPage.applyCouponAtCheckout2();
 
             await expect(
                 page.getByText("Coupon code applied successfully.").first(),
