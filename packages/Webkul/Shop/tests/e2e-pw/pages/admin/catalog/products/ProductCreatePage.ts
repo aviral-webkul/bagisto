@@ -446,8 +446,40 @@ export class ProductCreation extends BasePage {
         });
         await this.hourSpinbutton.fill(hour);
         await this.minuteSpinbutton.fill(minute);
-        await this.page.waitForTimeout(500);
+        await expect(this.hourSpinbutton).toHaveValue(hour);
+        await expect(this.minuteSpinbutton).toHaveValue(minute);
         await this.minuteSpinbutton.press("Enter");
+        await this.closeFlatpickr();
+    }
+
+    /**
+     * Dismiss any open flatpickr popup and wait for it to actually go away.
+     *
+     * The booking slot time pickers float above the form. While one is open it
+     * covers both the slot modal's Save button and the page's Save Product
+     * button, so the next click lands on the picker and the action silently does
+     * nothing until it times out.
+     */
+    private async closeFlatpickr() {
+        await expect(async () => {
+            if (await this.flatpickrCalendar.first().isVisible()) {
+                await this.escapeTarget.press("Escape");
+            }
+
+            await expect(this.flatpickrCalendar).toHaveCount(0, {
+                timeout: 1000,
+            });
+        }).toPass({ timeout: 10000 });
+    }
+
+    /**
+     * Save a booking slot modal, making sure the time picker is out of the way
+     * first and that the modal is really gone before the caller moves on.
+     */
+    private async saveSlotModal() {
+        await this.closeFlatpickr();
+        await this.modalSaveButton.click();
+        await expect(this.modalSaveButton).toBeHidden();
     }
 
     private async fillInlineDaySlot(
@@ -465,7 +497,7 @@ export class ProductCreation extends BasePage {
         if (pressEscapeBeforeSave) {
             await this.escapeTarget.press("Escape");
         }
-        await this.modalSaveButton.click();
+        await this.saveSlotModal();
     }
 
     private inlineDaySlotTrigger(dayIndex: number) {
@@ -1167,8 +1199,7 @@ export class ProductCreation extends BasePage {
                     await this.fillTimeTextbox("From", 0, "10", "35");
                     await this.page.waitForTimeout(500);
                     await this.fillTimeTextbox("To", 0, "11", "35");
-                    await this.escapeTarget.press("Escape");
-                    await this.modalSaveButton.click();
+                    await this.saveSlotModal();
                     return product.name;
                 } else {
                     await this.bookingSelect("same_slot_all_days").selectOption(
@@ -1192,8 +1223,7 @@ export class ProductCreation extends BasePage {
                     await this.addSlotsButton.click();
                     await this.fillTimeTextbox("From", 0, "10", "35");
                     await this.fillTimeTextbox("To", 0, "11", "35");
-                    await this.escapeTarget.press("Escape");
-                    await this.modalSaveButton.click();
+                    await this.saveSlotModal();
                     return product.name;
                 } else {
                     await this.bookingSelect("same_slot_all_days").selectOption(
@@ -1220,8 +1250,7 @@ export class ProductCreation extends BasePage {
                     await this.addSlotsButton.click();
                     await this.fillTimeTextbox("From", 0, "10", "35");
                     await this.fillTimeTextbox("To", 0, "11", "35");
-                    await this.escapeTarget.press("Escape");
-                    await this.modalSaveButton.click();
+                    await this.saveSlotModal();
                     return product.name;
                 } else {
                     await this.bookingSelect("same_slot_all_days").selectOption(
@@ -1245,8 +1274,7 @@ export class ProductCreation extends BasePage {
                     await this.addSlotsButton.click();
                     await this.fillTimeTextbox("From", 0, "10", "35");
                     await this.fillTimeTextbox("To", 0, "11", "35");
-                    await this.escapeTarget.press("Escape");
-                    await this.modalSaveButton.click();
+                    await this.saveSlotModal();
                     return product.name;
                 } else {
                     await this.bookingSelect("same_slot_all_days").selectOption(
@@ -1273,6 +1301,7 @@ export class ProductCreation extends BasePage {
     }
 
     private async saveAndVerify() {
+        await this.closeFlatpickr();
         await this.saveProductButton.click();
         await expect(this.updateProductSuccessToast).toBeVisible();
     }

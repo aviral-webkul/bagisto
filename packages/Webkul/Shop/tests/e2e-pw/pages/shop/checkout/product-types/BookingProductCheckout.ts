@@ -54,22 +54,23 @@ export class BookingProductCheckout extends CheckoutHelper {
     }
 
     private async tablematch(table: boolean) {
-        await this.shoppingCartIcon.click();
-        await this.cartSummaryToggle.click()
+        await this.openCartDrawer();
+        await this.expandCartSummary();
         if (table) {
             await expect(this.cartSummaryText(7)).toContainText('Per Table')
             await expect(this.cartSummaryText(9)).toContainText('2')
         } else {
             await expect(this.cartSummaryText(7)).toContainText('Per Guest')
         }
-        await this.cartDismissButton.click()
+        await this.closeCartDrawer();
     }
 
     private async hourMatch(hour: string) {
-        await this.cartSummaryToggle.click()
+        await this.openCartDrawer();
+        await this.expandCartSummary();
         const timePattern = new RegExp(`${hour}:\\d{2} [AP]M`);
         await expect(this.cartSummaryText(1)).toContainText(timePattern);
-        await this.cartOverlayDismissButton.click()
+        await this.closeCartDrawer();
     }
 
     private async eventCheckout(hour: string, tickets: number, allowCancellation?: boolean) {
@@ -82,8 +83,6 @@ export class BookingProductCheckout extends CheckoutHelper {
         }
         await this.addToCartButton.click();
         await expect(this.addCartSuccess.first()).toBeVisible();
-        await this.shoppingCartIcon.click();
-        await this.page.waitForTimeout(500)
         await this.hourMatch(hour)
         await this.proceedToCheckout();
         await this.choosePaymentMethod.click();
@@ -123,8 +122,6 @@ export class BookingProductCheckout extends CheckoutHelper {
         await this.selectslot()
         await this.addToCartButton.click();
         await expect(this.addCartSuccess.first()).toBeVisible();
-        await this.shoppingCartIcon.click();
-        await this.page.waitForTimeout(500)
         if (hour) {
             await this.hourMatch(hour);
         }
@@ -148,8 +145,6 @@ export class BookingProductCheckout extends CheckoutHelper {
             await this.selectslot()
             await this.addToCartButton.click();
             await expect(this.addCartSuccess.first()).toBeVisible();
-            await this.shoppingCartIcon.click();
-            await this.page.waitForTimeout(500)
             if (hour) {
                 await this.hourMatch(hour);
             }
@@ -206,7 +201,6 @@ export class BookingProductCheckout extends CheckoutHelper {
         await this.addToCartButton.click();
         await expect(this.addCartSuccess.first()).toBeVisible();
         await this.tablematch(table)
-        await this.shoppingCartIcon.click();
         await this.hourMatch(hour)
         await this.proceedToCheckout();
         await this.choosePaymentMethod.click();
@@ -219,6 +213,11 @@ export class BookingProductCheckout extends CheckoutHelper {
             await this.visit(`customer/account/orders/view/${orderId}`)
             await expect(this.bookingItemsWillNotBeCanceledText).toBeVisible()
         } else {
+            /**
+             * The notice lives inside a Vue component, so it is not in the DOM
+             * until the product page has loaded and hydrated.
+             */
+            await this.page.waitForLoadState("networkidle");
             await expect(this.cancellationNotAllowedText).toBeVisible()
         }
     }
@@ -237,8 +236,6 @@ export class BookingProductCheckout extends CheckoutHelper {
             }
             await this.addToCartButton.click();
             await expect(this.addCartSuccess.first()).toBeVisible();
-            await this.shoppingCartIcon.click();
-            await this.page.waitForTimeout(500)
             if (hour) {
                 await this.hourMatch(hour);
             }
