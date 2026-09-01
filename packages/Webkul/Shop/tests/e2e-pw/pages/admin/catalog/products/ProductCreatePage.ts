@@ -1292,7 +1292,13 @@ export class ProductCreation extends BasePage {
     }
 
     private async saveAndVerify() {
-        await this.saveProductButton.click();
+        await Promise.all([
+            this.page.waitForURL(/\/admin\/catalog\/products(\?.*)?$/, {
+                timeout: 60000,
+            }),
+            this.saveProductButton.click(),
+        ]);
+
         await expect(this.updateProductSuccessToast).toBeVisible();
     }
 

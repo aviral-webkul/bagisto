@@ -1,5 +1,6 @@
 import { test } from "../setup";
 import { RmaManagePage } from "../pages/admin/sales/RmaManagePage";
+import { RmaStorefrontPage } from "../pages/shop/RmaStorefrontPage";
 import { SalesCreatePage } from "../pages/admin/sales/SalesCreatePage";
 import { SalesManagePage } from "../pages/admin/sales/SalesManagePage";
 
@@ -70,6 +71,160 @@ test.describe(" rma management ", () => {
         adminPage,
     }) => {
         await new RmaManagePage(adminPage).adminCreateRmaStatus();
+    });
+});
+
+test.describe("rma storefront", () => {
+    test.setTimeout(240000);
+
+    test("should place an order the customer can return", async ({
+        adminPage,
+        shopPage,
+    }) => {
+        await new SalesCreatePage(adminPage).createRmaEnabledSimpleProduct();
+
+        await new RmaStorefrontPage(shopPage).createReturnableOrder();
+    });
+
+    test("should invoice that order so the item becomes returnable", async ({
+        shopPage,
+    }) => {
+        await new RmaManagePage(shopPage).adminInvoiceCreateRMA();
+    });
+
+    test("should refuse a return quantity above the quantity ordered", async ({
+        shopPage,
+    }) => {
+        const storefront = new RmaStorefrontPage(shopPage);
+
+        await storefront.signIn();
+        await storefront.expectQuantityAboveOrderedIsRejected();
+    });
+
+    test("should refuse a request until the terms are accepted", async ({
+        shopPage,
+    }) => {
+        const storefront = new RmaStorefrontPage(shopPage);
+
+        await storefront.signIn();
+        await storefront.expectTermsAreRequired();
+    });
+
+    test("should let the customer raise a return", async ({ shopPage }) => {
+        const storefront = new RmaStorefrontPage(shopPage);
+
+        await storefront.signIn();
+        await storefront.openNewRequestForm();
+        await storefront.fillRequest();
+        await storefront.submitRequest();
+    });
+
+    test("should list the request on the customer's rma page", async ({
+        shopPage,
+    }) => {
+        const storefront = new RmaStorefrontPage(shopPage);
+
+        await storefront.signIn();
+        await storefront.expectRequestListed();
+    });
+
+    test("should open the request detail page without a server error", async ({
+        shopPage,
+    }) => {
+        const storefront = new RmaStorefrontPage(shopPage);
+
+        await storefront.signIn();
+        await storefront.expectRequestDetailPageOpens();
+    });
+
+    test("should show the request details and its conversation", async ({
+        shopPage,
+    }) => {
+        const storefront = new RmaStorefrontPage(shopPage);
+
+        await storefront.signIn();
+        await storefront.expectRequestDetails();
+    });
+
+    test("should paint the request status with readable contrast", async ({
+        shopPage,
+    }) => {
+        const storefront = new RmaStorefrontPage(shopPage);
+
+        await storefront.signIn();
+        await storefront.expectStatusPillIsReadable();
+    });
+
+    test("should let the customer cancel the request", async ({ shopPage }) => {
+        const storefront = new RmaStorefrontPage(shopPage);
+
+        await storefront.signIn();
+        await storefront.cancelRequest();
+    });
+});
+
+test.describe("rma storefront custom fields", () => {
+    test.setTimeout(240000);
+
+    const requiredField = {
+        label: "Return Note",
+        code: "return_note",
+        type: "text",
+        required: true,
+    };
+
+    const multiselectField = {
+        label: "Return Faults",
+        code: "return_faults",
+        type: "multiselect",
+    };
+
+    test("should place an order the customer can return", async ({
+        adminPage,
+        shopPage,
+    }) => {
+        await new SalesCreatePage(adminPage).createRmaEnabledSimpleProduct();
+
+        await new RmaStorefrontPage(shopPage).createReturnableOrder();
+    });
+
+    test("should invoice that order so the item becomes returnable", async ({
+        shopPage,
+    }) => {
+        await new RmaManagePage(shopPage).adminInvoiceCreateRMA();
+    });
+
+    test("should post a multiselect custom field with the request", async ({
+        adminPage,
+        shopPage,
+    }) => {
+        const admin = new RmaManagePage(adminPage);
+        const storefront = new RmaStorefrontPage(shopPage);
+
+        await admin.adminCreateRmaCustomField(multiselectField);
+
+        try {
+            await storefront.signIn();
+            await storefront.expectMultiselectCustomFieldIsPosted();
+        } finally {
+            await admin.adminDeleteRmaCustomField(multiselectField.label);
+        }
+    });
+    test("should keep the form usable with a required custom field", async ({
+        adminPage,
+        shopPage,
+    }) => {
+        const admin = new RmaManagePage(adminPage);
+        const storefront = new RmaStorefrontPage(shopPage);
+
+        await admin.adminCreateRmaCustomField(requiredField);
+
+        try {
+            await storefront.signIn();
+            await storefront.expectRequiredCustomFieldIsUsable();
+        } finally {
+            await admin.adminDeleteRmaCustomField(requiredField.label);
+        }
     });
 });
 
